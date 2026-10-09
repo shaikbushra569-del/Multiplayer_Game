@@ -1,0 +1,6 @@
+{
+  "name": "Tic-Tac-Toe Arena - Real-Time Multiplayer",
+  "description": "Full-stack real-time multiplayer Tic-Tac-Toe powered by Node.js, Express, and Socket.IO with server-authoritative rules, room codes, and live player synchronization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

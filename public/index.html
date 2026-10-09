@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe Arena — Multiplayer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="logo-badge">⚔️ TIC-TAC-TOE ARENA</div>
+      <div id="connectionStatus" class="status-indicator">Connecting...</div>
+    </header>
+
+    <!-- Welcome / Lobby Screen -->
+    <main id="lobbyScreen" class="screen active">
+      <div class="card hero-card">
+        <h1>Real-Time Multiplayer</h1>
+        <p class="subtitle">Play Tic-Tac-Toe across devices in real-time over WebSockets</p>
+
+        <div class="input-group">
+          <label for="playerNameInput">Your Gamer Tag</label>
+          <input type="text" id="playerNameInput" placeholder="Enter your name" maxlength="15" value="Player 1">
+        </div>
+
+        <div class="action-grid">
+          <div class="action-box">
+            <h3>Host New Match</h3>
+            <p>Generate a unique room code and invite an opponent.</p>
+            <button id="createRoomBtn" class="btn btn-primary">Create Room</button>
+          </div>
+
+          <div class="action-divider"><span>OR</span></div>
+
+          <div class="action-box">
+            <h3>Join Game</h3>
+            <p>Enter a 6-character room code from your friend.</p>
+            <div class="join-row">
+              <input type="text" id="joinRoomInput" placeholder="ROOM CODE" maxlength="10">
+              <button id="joinRoomBtn" class="btn btn-secondary">Join</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="lobbyError" class="alert-error hidden"></div>
+      </div>
+    </main>
+
+    <!-- Game Room Screen -->
+    <main id="gameScreen" class="screen">
+      <div class="card room-card">
+        <div class="room-top-bar">
+          <div class="room-code-tag">
+            <span>ROOM CODE:</span>
+            <strong id="displayRoomCode">------</strong>
+            <button id="copyCodeBtn" class="btn-icon" title="Copy Room Code">📋</button>
+          </div>
+          <button id="leaveRoomBtn" class="btn-text">Exit Room</button>
+        </div>
+
+        <div class="scoreboard">
+          <div class="player-card" id="cardPlayerX">
+            <div class="symbol-badge x-badge">X</div>
+            <div class="player-info">
+              <span class="player-name" id="namePlayerX">Waiting...</span>
+              <span class="player-role" id="rolePlayerX">Host</span>
+            </div>
+            <div class="score-val" id="scoreX">0</div>
+          </div>
+
+          <div class="ties-card">
+            <span>TIES</span>
+            <strong id="scoreTies">0</strong>
+          </div>
+
+          <div class="player-card" id="cardPlayerO">
+            <div class="symbol-badge o-badge">O</div>
+            <div class="player-info">
+              <span class="player-name" id="namePlayerO">Waiting...</span>
+              <span class="player-role" id="rolePlayerO">Guest</span>
+            </div>
+            <div class="score-val" id="scoreO">0</div>
+          </div>
+        </div>
+
+        <div class="turn-status-banner" id="turnBanner">
+          Waiting for opponent to connect...
+        </div>
+
+        <div class="board-wrapper">
+          <div class="board" id="gameBoard">
+            <button class="cell" data-index="0" aria-label="Cell 1"></button>
+            <button class="cell" data-index="1" aria-label="Cell 2"></button>
+            <button class="cell" data-index="2" aria-label="Cell 3"></button>
+            <button class="cell" data-index="3" aria-label="Cell 4"></button>
+            <button class="cell" data-index="4" aria-label="Cell 5"></button>
+            <button class="cell" data-index="5" aria-label="Cell 6"></button>
+            <button class="cell" data-index="6" aria-label="Cell 7"></button>
+            <button class="cell" data-index="7" aria-label="Cell 8"></button>
+            <button class="cell" data-index="8" aria-label="Cell 9"></button>
+          </div>
+        </div>
+
+        <div class="game-controls">
+          <button id="rematchBtn" class="btn btn-primary hidden">Request Rematch</button>
+        </div>
+
+        <div id="gameError" class="alert-error hidden"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
